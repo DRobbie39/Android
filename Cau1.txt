@@ -1,0 +1,228 @@
+==============================================================================================================
+//Xử lý
+ActivityMainBinding binding;
+
+    ExecutorService executorService;
+
+    private final String[] keypadChars = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"};
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        executorService = Executors.newSingleThreadExecutor();
+
+        addEvents();
+    }
+
+    private void addEvents() {
+        binding.btnDraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.containerLayout.removeAllViews();
+                executeLongRunningTask();
+            }
+        });
+    }
+
+    private void executeLongRunningTask() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                //Kiểm tra đầu vào đã nhập chưa
+                if (binding.edtNumb.getText().toString().isEmpty()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "Không được bỏ trống", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
+
+                int numbOfViews = Integer.parseInt(binding.edtNumb.getText().toString());
+                Random random = new Random();
+                for (int i = 1; i <= numbOfViews; i++) {
+                    int randNumb = random.nextInt(100);
+                    int index = i;
+                    //Update progress on UI
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Update UI
+                            //=======================3 View một hàng========================
+//                            TextView textView = new TextView(MainActivity.this);
+//
+//                            textView.setText(String.valueOf(randNumb));
+//                            textView.setTextSize(24);
+//                            textView.setTextColor(Color.WHITE);
+//                            textView.setGravity(Gravity.CENTER);
+//
+//                            if(randNumb % 2 == 0) {
+//                                textView.setBackgroundColor(Color.rgb(0, 150, 136));
+//                            } else {
+//                                textView.setBackgroundColor(Color.rgb(244, 57, 123));
+//                            }
+//
+//                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 160, 1.0f);
+//                            params.setMargins(16, 16, 16, 16);
+//                            textView.setLayoutParams(params);
+//
+//
+//                            if (index % 3 == 1) {
+//                                LinearLayout rowLayout = new LinearLayout(MainActivity.this);
+//                                rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+//                                rowLayout.setLayoutParams(new LinearLayout.LayoutParams(
+//                                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//                                binding.containerLayout.addView(rowLayout);
+//                            }
+//
+//                            LinearLayout currentRow = (LinearLayout) binding.containerLayout.getChildAt(
+//                                    binding.containerLayout.getChildCount() - 1);
+//                            currentRow.addView(textView);
+                            //=======================Button và Edit========================
+//                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+//                            params.setMargins(16, 16, 16, 16);
+//
+//                            if(index % 2 == 0) {
+//                                EditText editText = new EditText(MainActivity.this);
+//
+//                                editText.setText(String.valueOf(randNumb));
+//                                editText.setTextSize(24);
+//
+//                                editText.setLayoutParams(params);
+//                                binding.containerLayout.addView(editText);
+//                            } else {
+//                                Button button = new Button(MainActivity.this);
+//
+//                                button.setText(String.valueOf(randNumb));
+//                                button.setTextSize(24);
+//                                button.setGravity(Gravity.CENTER);
+//
+//                                button.setLayoutParams(params);
+//                                binding.containerLayout.addView(button);
+//                            }
+                            //======================Ti le 2:1==================
+//                            TextView textView = new TextView(MainActivity.this);
+//                            textView.setText(String.valueOf(randNumb));
+//                            textView.setTextSize(24);
+//                            textView.setGravity(Gravity.CENTER);
+//                            textView.setTextColor(Color.WHITE);
+//
+//                            // Set background color based on the random number
+//                            if (randNumb % 2 == 0) {
+//                                textView.setBackgroundColor(Color.rgb(0, 150, 136));
+//                            } else {
+//                                textView.setBackgroundColor(Color.rgb(244, 57, 123));
+//                            }
+//
+//                            // Adjust layout parameters based on whether the row index is odd or even
+//                            LinearLayout.LayoutParams params;
+//                            if ((index % 2 == 1 && ((index - 1) / 2) % 2 != 0) || (index % 2 == 0 && ((index - 1) / 2) % 2 == 0)) {
+//                                params = new LinearLayout.LayoutParams(0, 160, 2.0f);
+//                            } else {
+//                                params = new LinearLayout.LayoutParams(0, 160, 1.0f);
+//                            }
+//                            params.setMargins(16, 16, 16, 16);
+//                            textView.setLayoutParams(params);
+//
+//                            if (index % 2 == 1) {
+//                                LinearLayout rowLayout = new LinearLayout(MainActivity.this);
+//                                rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+//                                rowLayout.setLayoutParams(new LinearLayout.LayoutParams(
+//                                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//                                binding.containerLayout.addView(rowLayout);
+//                            }
+//
+//                            LinearLayout currentRow = (LinearLayout) binding.containerLayout.getChildAt(
+//                                    binding.containerLayout.getChildCount() - 1);
+//                            currentRow.addView(textView);
+                            //======================12 nút==================
+//                            String buttonText = keypadChars[(index-1) % keypadChars.length];
+//
+//                            Button button = new Button(MainActivity.this);
+//                            button.setText(buttonText);
+//
+//                            button.setTextSize(24);
+//                            button.setTextColor(Color.WHITE);
+//                            button.setGravity(Gravity.CENTER);
+//
+//                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, 160, 1.0f);
+//                            params.setMargins(16, 16, 16, 16);
+//                            button.setLayoutParams(params);
+//
+//
+//                            if (index % 3 == 1) {
+//                                LinearLayout rowLayout = new LinearLayout(MainActivity.this);
+//                                rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+//                                rowLayout.setLayoutParams(new LinearLayout.LayoutParams(
+//                                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//                                binding.containerLayout.addView(rowLayout);
+//                            }
+//
+//                            // Xử lý sự kiện khi nhấn các nút bàn phím
+//                            button.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    String buttonText = ((Button) v).getText().toString();
+//                                    String currentText = binding.edtDraw.getText().toString();
+//                                    binding.edtDraw.setText(currentText + buttonText);
+//                                }
+//                            });
+//
+//                            LinearLayout currentRow = (LinearLayout) binding.containerLayout.getChildAt(
+//                                    binding.containerLayout.getChildCount() - 1);
+//                            currentRow.addView(button);
+//===========================================================================================================
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        });
+    }
+
+    protected void onStop () {
+        super.onStop();
+        if (executorService != null)
+            executorService.shutdownNow();
+    }
+==========================================================================================================================================
+//Giao diện
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <Button
+            android:id="@+id/btnDraws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DRAW VIEW"
+            android:backgroundTint="#2196F3"
+            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/edtNumberOfView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:inputType="number"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:id="@+id/containerLayout"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+    </ScrollView>
