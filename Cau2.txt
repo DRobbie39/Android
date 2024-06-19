@@ -1,0 +1,661 @@
+//Giao diện MainActivity
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh sách sản phẩm"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:background="@color/black"
+        android:textColor="@color/white"/>
+
+    <ListView
+        android:id="@+id/lvProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+
+//Giao diện edit_dialog
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thông tin chi tiết"
+        android:textSize="26sp"
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm: "
+            android:textSize="17sp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Đơn giá: "
+            android:textSize="17sp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/edtPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:singleLine="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lưu lại"
+            android:layout_marginRight="5dp"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trở về"
+            android:textSize="17sp" />
+    </LinearLayout>
+</LinearLayout>
+
+//Giao diện item_list
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mã sản phẩm: "
+            android:textSize="17sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtProductCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm: "
+            android:textSize="17sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Giá bán: "
+            android:textSize="17sp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/txtProductPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+</LinearLayout>
+
+//models
+//Product
+package models;
+
+public class Product {
+    String productCode;
+    String productName;
+    double productPrice;
+
+    public Product(String productCode, String productName, double productPrice) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+}
+
+//database
+//ProductDatabase
+package database;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
+public class ProductDatabase extends SQLiteOpenHelper {
+    public static final String DB_NAME = "products.sqlite";
+    public static final int DB_VERSION = 1;
+    public static final String TBL_NAME = "Products";
+    public static final String COL_CODE = "ProductCode";
+    public static final String COL_NAME = "ProductName";
+    public static final String COL_PRICE = "ProductPrice";
+
+    public ProductDatabase(@Nullable Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String sql ="CREATE TABLE IF NOT EXISTS " + TBL_NAME + " (" + COL_CODE + " VARCHAR(50) PRIMARY KEY, " + COL_NAME + " VARCHAR(50), " + COL_PRICE + " REAL)";
+        db.execSQL(sql);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TBL_NAME);
+        onCreate(db);
+    }
+
+    //Lấy dữ liệu
+    public Cursor getData (String sql) {
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            return db.rawQuery(sql, null);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    //Thực thi việc xóa
+    public boolean execSql (String sql) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.execSQL(sql);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    //Thực thi thêm dữ liệu
+    public boolean insertData(String code, String name, double price) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            String sql = "INSERT INTO " + TBL_NAME + " VALUES (?, ?, ?)";
+            SQLiteStatement statement = db.compileStatement(sql);
+            statement.clearBindings();
+            statement.bindString(1, code);
+            statement.bindString(2, name);
+            statement.bindDouble(3, price);
+
+            statement.executeInsert();
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    //Thực thi việc chỉnh sửa dữ liệu
+    public boolean updateData(String code, String name, double price) {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            String sql = "UPDATE " + TBL_NAME + " SET "
+                    + ProductDatabase.COL_NAME + " = ?, "
+                    + ProductDatabase.COL_PRICE + " = ? "
+                    + "WHERE " + ProductDatabase.COL_CODE + " = ?";
+
+            SQLiteStatement statement = db.compileStatement(sql);
+            statement.clearBindings();
+            statement.bindString(1, name);
+            statement.bindDouble(2, price);
+            statement.bindString(3, code);
+
+            statement.executeUpdateDelete();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public int getNumbOfRows() {
+        Cursor cursor = getData("SELECT * FROM " + TBL_NAME);
+        int numbOfRows = cursor.getCount();
+        cursor.close();
+        return numbOfRows;
+    }
+
+    public void createSampleData() {
+        if (getNumbOfRows() == 0) {
+            try {
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK01', 'Vertu Constellation', 5000000)");
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK02', 'IPhone 5S', 8000000)");
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK03', 'Nokia Lumia 925', 1950000)");
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK04', 'Samsung Galaxy S4', 5617000)");
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK05', 'HTC Desire 500', 3000000)");
+                execSql("INSERT INTO " + TBL_NAME + " VALUES('HK06', 'HKPhone Revo LEAD', 4120000)");
+            } catch (Exception e) {
+                Log.e("Error ", e.getMessage().toString());
+            }
+        }
+    }
+}
+
+//adapters
+//ProductAdapter
+package adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.phangiadat.review_2.MainActivity;
+import com.phangiadat.review_2.R;
+
+import java.util.List;
+
+import Models.Product;
+
+public class ProductAdapter extends BaseAdapter {
+    MainActivity context;
+    int item_layout;
+    List<Product> products;
+
+    public ProductAdapter(MainActivity context, int item_layout, List<Product> products) {
+        this.context = context;
+        this.item_layout = item_layout;
+        this.products = products;
+    }
+
+    @Override
+    public int getCount() {
+        return products.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return products.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(item_layout, null);
+
+            //Linking views
+            holder.txtProductCode = convertView.findViewById(R.id.txtProductCode);
+            holder.txtProductName = convertView.findViewById(R.id.txtProductName);
+            holder.txtProductPrice = convertView.findViewById(R.id.txtProductPrice);
+
+            convertView.setTag(holder);
+        }
+        else
+            holder = (ViewHolder) convertView.getTag();
+
+        //Binding data
+        Product product =  products.get(position);
+        holder.txtProductCode.setText(product.getProductCode());
+        holder.txtProductName.setText(product.getProductName());
+        holder.txtProductPrice.setText(String.valueOf(product.getProductPrice()));
+
+        return convertView;
+    }
+
+    public static class ViewHolder{
+        TextView txtProductCode, txtProductName, txtProductPrice;
+    }
+}
+
+//Chương trình chính MainActivity
+package com.phangiadat.review_1;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.phangiadat.review_1.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import adapters.ProductAdapter;
+import database.ProductDatabase;
+import models.Product;
+
+public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
+    ProductDatabase db;
+    ProductAdapter adapter;
+    ArrayList<Product> products;
+    ActivityResultLauncher<Intent> launcher;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        db = new ProductDatabase(this);
+
+        prepareDb();
+        getData();
+        addEvents();
+    }
+
+    private void getData() {
+        adapter = new ProductAdapter(MainActivity.this, R.layout.item_list, loadDataFromDB());
+        binding.lvProduct.setAdapter(adapter);
+    }
+
+    private List<Product> loadDataFromDB() {
+        products = new ArrayList<>();
+        Cursor cursor = db.getData("SELECT * FROM " + ProductDatabase.TBL_NAME);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                products.add(new Product(cursor.getInt(0), cursor.getString(1), cursor.getDouble(2)));
+            }
+            cursor.close();
+        }
+
+        return products;
+    }
+
+    private void prepareDb() {
+        db = new ProductDatabase(this);
+        db.createSampleData();
+    }
+
+    private void addEvents() {
+        //Giữ lâu hiện dialog
+        binding.lvProduct.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showOptionsDialog(position);
+                return true;
+            }
+        });
+    }
+	
+    //Chức năng xóa
+    private void showOptionsDialog(int position) {
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.dialog);
+
+        // Lấy các view từ dialog
+        EditText edtCode = dialog.findViewById(R.id.edtCode);
+        EditText edtName = dialog.findViewById(R.id.edtName);
+        EditText edtPrice = dialog.findViewById(R.id.edtPrice);
+        Button btnDelete = dialog.findViewById(R.id.btnDelete);
+        Button btnBack = dialog.findViewById(R.id.btnBack);
+
+        // Lấy thông tin sản phẩm từ vị trí đã chọn
+        Product product = products.get(position);
+
+        // Hiển thị thông tin sản phẩm lên các EditText
+        edtCode.setText(String.valueOf(product.getProductCode()));
+        edtName.setText(product.getProductName());
+        edtPrice.setText(String.valueOf(product.getProductPrice()));
+
+        // Thiết lập hành động cho nút Xóa sản phẩm
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Xóa sản phẩm khỏi cơ sở dữ liệu
+                db.execSql("DELETE FROM " + ProductDatabase.TBL_NAME + " WHERE " + ProductDatabase.COL_CODE + " = " + product.getProductCode());
+
+                // Cập nhật lại danh sách sản phẩm
+                getData();
+
+                // Đóng dialog sau khi xóa
+                dialog.dismiss();
+            }
+        });
+
+        // Thiết lập hành động cho nút Trở về
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Đóng dialog
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+}
+
+//Chức năng thêm
+private void showOptionsDialog(int position) {
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.add_dialog);
+
+        // Lấy các view từ dialog
+        EditText edtCode = dialog.findViewById(R.id.edtCode);
+        EditText edtName = dialog.findViewById(R.id.edtName);
+        EditText edtPrice = dialog.findViewById(R.id.edtPrice);
+        Button btnSave = dialog.findViewById(R.id.btnSave);
+        Button btnBack = dialog.findViewById(R.id.btnBack);
+
+        // Lấy thông tin sản phẩm từ vị trí đã chọn
+        Product product = products.get(position);
+
+        // Hiển thị thông tin sản phẩm lên các EditText
+//        edtCode.setText(String.valueOf(product.getProductCode()));
+//        edtName.setText(product.getProductName());
+//        edtPrice.setText(String.valueOf(product.getProductPrice()));
+
+        // Thiết lập hành động cho nút Thêm sản phẩm
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = edtCode.getText().toString();
+                String name = edtName.getText().toString();
+                if (code.isEmpty() || name.isEmpty() || edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Hãy điền đầy đủ các trường", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                double price;
+                try {
+                    price = Double.parseDouble(edtPrice.getText().toString());
+                    if (price <= 0) {
+                        Toast.makeText(MainActivity.this, "Giá phải là số dương.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "Định dạng tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                db.insertData(code, name, price);
+                getData();
+                dialog.dismiss();
+            }
+        });
+
+        // Thiết lập hành động cho nút Trở về
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Đóng dialog
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+//Chức năng sửa
+private void showOptionsDialog(int position) {
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setContentView(R.layout.edit_dialog);
+
+        // Lấy các view từ dialog
+        EditText edtName = dialog.findViewById(R.id.edtName);
+        EditText edtPrice = dialog.findViewById(R.id.edtPrice);
+        Button btnSave = dialog.findViewById(R.id.btnSave);
+        Button btnBack = dialog.findViewById(R.id.btnBack);
+
+        // Lấy thông tin sản phẩm từ vị trí đã chọn
+        Product product = products.get(position);
+
+        // Hiển thị thông tin sản phẩm lên các EditText
+        edtName.setText(product.getProductName());
+        edtPrice.setText(String.valueOf(product.getProductPrice()));
+
+        // Thiết lập hành động cho nút Sửa sản phẩm
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = edtName.getText().toString();
+                if (name.isEmpty() || edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Hãy điền đầy đủ các trường", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                double price;
+                try {
+                    price = Double.parseDouble(edtPrice.getText().toString());
+                    if (price <= 0) {
+                        Toast.makeText(MainActivity.this, "Giá phải là số dương.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "Định dạng tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                db.updateData(product.getProductCode(), name, price);
+                getData();
+                dialog.dismiss();
+            }
+        });
+
+        // Thiết lập hành động cho nút Trở về
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Đóng dialog
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
