@@ -1,1 +1,1 @@
-# Android
+# Android format: Ctrl + Alt + L
