@@ -276,9 +276,19 @@ public class ProductDatabase extends SQLiteOpenHelper {
     }
 
     //Thực thi thêm dữ liệu
-    public boolean insertData(String code, String name, double price) {
+    public boolean insertData(String code, String name, double price, Context context) {
         try {
             SQLiteDatabase db = getWritableDatabase();
+	    String query = "SELECT COUNT(*) FROM " + TBL_NAME + " WHERE " + COL_CODE + " = ?";
+            SQLiteStatement checkStatement = db.compileStatement(query);
+            checkStatement.bindString(1, code);
+            long count = checkStatement.simpleQueryForLong();
+
+            if (count > 0) {
+                Toast.makeText(context, "Mã đã tồn tại. Vui lòng nhập mã mới", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             String sql = "INSERT INTO " + TBL_NAME + " VALUES (?, ?, ?)";
             SQLiteStatement statement = db.compileStatement(sql);
             statement.clearBindings();
@@ -603,7 +613,7 @@ private void showOptionsDialog(int position) {
                     return;
                 }
 
-                db.insertData(code, name, price);
+                db.insertData(code, name, price, MainActivity.this);
                 getData();
                 dialog.dismiss();
             }
