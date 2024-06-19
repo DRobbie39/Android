@@ -518,13 +518,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Xóa sản phẩm khỏi cơ sở dữ liệu
-                db.execSql("DELETE FROM " + ProductDatabase.TBL_NAME + " WHERE " + ProductDatabase.COL_CODE + " = " + product.getProductCode());
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                // Cập nhật lại danh sách sản phẩm
-                getData();
+                builder.setTitle("Xác nhận xóa!");
+                builder.setIcon(android.R.drawable.ic_delete);
+                builder.setMessage("Bạn có chắc muốn xóa sản phẩm này?");
 
-                // Đóng dialog sau khi xóa
-                dialog.dismiss();
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogDeleteConfirm, int which) {
+                        db.execSql("DELETE FROM " + ProductDatabase.TBL_NAME + " WHERE " + ProductDatabase.COL_CODE + " = '" + product.getProductCode() +"'");
+                        getData();
+                        dialogDeleteConfirm.dismiss();
+                        dialog.dismiss();
+                    }
+                });
+
+                Dialog dialogDeleteConfirm = builder.create();
+                dialogDeleteConfirm.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialogDeleteConfirm.show();
             }
         });
 
