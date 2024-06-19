@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="#FAFAFA">
+
+    <ImageView
+        android:id="@+id/imvPhoto"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/txtCarName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Car Name"
+                android:textSize="26sp"
+                android:textColor="#212121"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"/>
+            <ImageView
+                android:id="@+id/imvEdit"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/baseline_mode_edit_24"
+                android:tint="#3F51B5"
+                android:padding="4dp"/>
+            <ImageView
+                android:id="@+id/imvDelete"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/baseline_delete_24"
+                android:tint="#F44336"
+                android:padding="4dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRentalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rental Price"
+            android:textSize="20sp"
+            android:textColor="#3F51B5"
+            android:paddingTop="4dp"
+            android:fontFamily="sans-serif"/>
+        <TextView
+            android:id="@+id/txtRentalLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rental Location"
+            android:textSize="20sp"
+            android:textColor="#3F51B5"
+            android:paddingTop="4dp"
+            android:fontFamily="sans-serif"/>
+        <TextView
+            android:id="@+id/txtCarType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Car Type"
+            android:textSize="20sp"
+            android:textColor="#3F51B5"
+            android:paddingTop="4dp"
+            android:fontFamily="sans-serif"/>
+    </LinearLayout>
+</LinearLayout>
